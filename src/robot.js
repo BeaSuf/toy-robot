@@ -1,12 +1,17 @@
 function createRobot() {
-    const position = null;
+    let position = null;
 
     function getPosition() {
         return position;
     }
 
+    function setPosition(newPosition) {
+        position = newPosition;
+    }
+
     return {
-        getPosition        
+        getPosition,
+        setPosition        
     }
 }
 
