@@ -24,56 +24,49 @@ describe("Table", () => {
             const testTable = table.createTable();
 
             const received = testTable.isPositionValid(2, 2);
-            const expected = true;
-            expect(received).toEqual(expected);
+            expect(received).toBeTruthy();
         });
 
         test("it should be false when x and y are is less then 0", () => {
             const testTable = table.createTable();
 
             const received = testTable.isPositionValid(-1, -2);
-            const expected = false;
-            expect(received).toEqual(expected);
+            expect(received).toBeFalsy();
         });
 
         test("it should be false when x and y are greater then 4", () => {
             const testTable = table.createTable();
 
             const received = testTable.isPositionValid(5, 8);
-            const expected = false;
-            expect(received).toEqual(expected);
+            expect(received).toBeFalsy();
         });
 
         test("it should be false when x is valid and y is less then 0", () => {
             const testTable = table.createTable();
 
             const received = testTable.isPositionValid(2, -1);
-            const expected = false;
-            expect(received).toEqual(expected);
+            expect(received).toBeFalsy();
         });
 
         test("it should be false when x is valid and y is greater then 4", () => {
             const testTable = table.createTable();
 
             const received = testTable.isPositionValid(2, 5);
-            const expected = false;
-            expect(received).toEqual(expected);
+            expect(received).toBeFalsy();
         });
 
         test("it should be false when x is less then 0 and y is valid", () => {
             const testTable = table.createTable();
 
             const received = testTable.isPositionValid(-1, 2);
-            const expected = false;
-            expect(received).toEqual(expected);
+            expect(received).toBeFalsy();
         });
 
         test("it should be false when x is greater then 4 and y is valid", () => {
             const testTable = table.createTable();
 
             const received = testTable.isPositionValid(5, 2);
-            const expected = false;
-            expect(received).toEqual(expected);
+            expect(received).toBeFalsy();
         });
     });
 });
