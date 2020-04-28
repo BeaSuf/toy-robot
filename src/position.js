@@ -1,7 +1,8 @@
-function createPosition(xPos, yPos) {
+function createPosition(xPos, yPos, facing) {
     const position = {
         x: xPos,
-        y: yPos
+        y: yPos,
+        f: facing
     }
 
     function getX() {
@@ -12,6 +13,10 @@ function createPosition(xPos, yPos) {
         return position.y;
     }
 
+    function getF() {
+        return position.f;
+    }
+
     function getPosition() {
         return position;
     }
@@ -19,6 +24,7 @@ function createPosition(xPos, yPos) {
     return {
         getX,
         getY,
+        getF,
         getPosition
     }
 }

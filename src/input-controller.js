@@ -15,17 +15,17 @@ function createInputController() {
     }
 
     function parseCommands(command) {
-        const place = /^PLACE \d+,\d+$/;
+        const place = /^PLACE\s{1}\d+,\d+,(WEST|NORTH|EAST|SOUTH)$/;
 
         let action = "";
         
         if(place.test(command)) {
-            let [placeAction, x, y]  = command.split(/[\s,]+/);
+            let [placeAction, x, y, f]  = command.split(/[\s,]+/);
             action = placeAction;
 
             if(table.isPositionValid(x, y)) {
                 robot = robotEntity.createRobot();
-                const position = positiionEntity.createPosition(parseInt(x), parseInt(y));
+                const position = positiionEntity.createPosition(parseInt(x), parseInt(y), f);
                 robot.setPosition(position);
             }             
         }    

@@ -15,14 +15,14 @@ describe("Robot", () => {
         test("it should set robot's position to a new position", () => {
             const testRobot = robot.createRobot();
 
-            const newPosition = position.createPosition(0, 0);
+            const newPosition = position.createPosition(0, 0, "NORTH");
             
             testRobot.setPosition(newPosition.getPosition());
             
             const received = testRobot.getPosition();
             const expected = newPosition.getPosition();
             expect(received).toEqual(expected);
-            expect(received).toEqual({x: 0, y:0});
+            expect(received).toEqual({x: 0, y: 0, f: "NORTH"});
         });
 
         test("it should return robot's position as null if new position is null", () => {
@@ -41,7 +41,7 @@ describe("Robot", () => {
         test("it should return true if position is not null", () => {
             const testRobot = robot.createRobot();
 
-            const newPosition = position.createPosition(0, 0);
+            const newPosition = position.createPosition(0, 0, "NORTH");
             
             testRobot.setPosition(newPosition.getPosition());
             
