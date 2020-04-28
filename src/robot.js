@@ -9,9 +9,14 @@ function createRobot() {
         position = newPosition;
     }
 
+    function isInPlace() {
+        return position != null;
+    }
+
     return {
         getPosition,
-        setPosition        
+        setPosition,
+        isInPlace        
     }
 }
 

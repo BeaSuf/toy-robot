@@ -2,18 +2,18 @@ const table = require("../src/table.js");
 
 describe("Table", () => {
     describe("Initialising", () => {
-        test("it should have x coordinate with default value of 5", () => { 
+        test("it should width property with default value of 5", () => { 
             const testTable = table.createTable();
         
-            const received = testTable.getX();
+            const received = testTable.getWidth();
             const expected = 5;
             expect(received).toEqual(expected);
         });
 
-        test("it should have y coordinate with default value of 5", () => { 
+        test("it should have height property with default value of 5", () => { 
             const testTable = table.createTable();
         
-            const received = testTable.getY();
+            const received = testTable.getHeight();
             const expected = 5;
             expect(received).toEqual(expected);
         });

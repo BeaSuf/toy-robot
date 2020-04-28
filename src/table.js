@@ -1,13 +1,14 @@
-function createTable(xCoordinate = 5, yCoordinate = 5) {
-    const x = xCoordinate;
-    const y = yCoordinate;
-
-    function getX() {
-        return x;
+function createTable(tableWidth = 5, tableHeight = 5) {
+    const width = tableWidth;
+    const height = tableHeight;
+    
+    
+    function getWidth() {
+        return width;
     }
 
-    function getY() {
-        return y;
+    function getHeight() {
+        return height;
     }
 
     function isPositionValid(x, y) {
@@ -15,16 +16,16 @@ function createTable(xCoordinate = 5, yCoordinate = 5) {
     }
 
     function isXValid(x) {
-        return x >= 0 && x <= getX() - 1;
+        return x >= 0 && x <= getWidth() - 1;
     }
 
     function isYValid(y) {
-        return y >= 0 && y <= getY() - 1;
+        return y >= 0 && y <= getHeight() - 1;
     }
 
     return {
-        getX,
-        getY,
+        getWidth,
+        getHeight,
         isPositionValid
     }
 }
