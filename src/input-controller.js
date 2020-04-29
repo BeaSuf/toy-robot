@@ -16,44 +16,19 @@ function createInputController() {
 
     function parseCommands(command) {
         const place = /^PLACE\s{1}\d+,\d+,(WEST|NORTH|EAST|SOUTH)$/;
-        const move = /^MOVE$/;
-        const left = /^LEFT$/;
-        const right = /^RIGHT$/;
-        const report = /^REPORT$/;
 
         let action = "";
-        let robotPlaced = false;
         
         if(place.test(command)) {
             let [placeAction, x, y, f]  = command.split(/[\s,]+/);
-            action = `${placeAction} ${x},${y},${f}`;
+            action = placeAction;
 
             if(table.isPositionValid(x, y)) {
                 robot = robotEntity.createRobot();
                 const position = positiionEntity.createPosition(parseInt(x), parseInt(y), f);
                 robot.setPosition(position);
-                robotPlaced = robot.isInPlace();
             }             
         }    
-
-        if(robotPlaced){
-            //TODO implement the commands instead of stubs 
-            if(move.test(command)) {
-                action = command;
-            }
-
-            if(left.test(command)) {
-                action = command;
-            }
-
-            if(right.test(command)) {
-                actoin = command;
-            }
-
-            if(report.test(command)) {
-                action = command;
-            }
-        }
 
         return action;
     }
