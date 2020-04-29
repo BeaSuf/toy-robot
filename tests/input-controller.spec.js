@@ -23,12 +23,12 @@ describe("Input-Controller", () => {
 
     describe("parseCommands", () => {
         describe("place command", () => {
-            test("it should return 'PLACE 1,2, NORTH' string if the command matches the 'PLACE' coomand patern", () => {
+            test("it should return 'PLACE 1,2,NORTH' string if the command matches the 'PLACE' coomand patern", () => {
                 const testInputController = inputController.createInputController();
 
                 const received = testInputController.parseCommands("PLACE 1,2,NORTH");
 
-                expect(received).toMatch("PLACE");
+                expect(received).toMatch("PLACE 1,2,NORTH");
             });
 
             test("it should return empty string if the command does not matches the 'PLACE' command patern", () => {
@@ -78,6 +78,12 @@ describe("Input-Controller", () => {
                 const robot = testInputController.getRobot();
 
                 expect(robot).toBeNull();
+            });
+        });
+
+        describe("Robot Placed", () => {
+            test("it should return 'MOVE' string if the command matches MOVE command", () => {
+
             });
         });
     })

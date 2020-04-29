@@ -22,7 +22,7 @@ describe("Position", () => {
             expect(received).not.toBeUndefined();
         });
 
-        test("it should have f properety", () => {
+        test("it should have f property", () => {
             const thePosition = positiion.createPosition(2, 2, "NORTH");
 
             const received = thePosition.getF();
@@ -38,6 +38,6 @@ describe("Position", () => {
             const received = thePosition.getPosition();
             const expected = {x: 2, y: 2, f: "NORTH"};
             expect(received).toEqual(expected);
-        })
+        });
     });
 }); 
