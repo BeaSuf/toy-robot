@@ -23,20 +23,22 @@ describe("Input-Controller", () => {
 
     describe("parseCommands", () => {
         describe("place command", () => {
-            test("it should return 'PLACE 1,2, NORTH' string if the command matches the 'PLACE' coomand patern", () => {
+            test("it should return robot's position matching the command the 'PLACE' command", () => {
                 const testInputController = inputController.createInputController();
 
                 const received = testInputController.parseCommands("PLACE 1,2,NORTH");
 
-                expect(received).toMatch("PLACE");
+                expect(received).toEqual({x:1, y:2, f:"NORTH"});
             });
 
-            test("it should return empty string if the command does not matches the 'PLACE' command patern", () => {
+            test("it should return null for the robot if the command does not matches the 'PLACE' command patern", () => {
                 const testInputController = inputController.createInputController();
 
-                const received = testInputController.parseCommands("PLACE_ME 1,2,FACING_NORTH");
+                testInputController.parseCommands("PLACE_ME 1,2,FACING_NORTH");
 
-                expect(received).toMatch("");
+                const robot = testInputController.getRobot();
+
+                expect(robot).toBeNull();
             });
 
             test("it should create a robot and place it on the table if position is valid", () => {
@@ -80,5 +82,33 @@ describe("Input-Controller", () => {
                 expect(robot).toBeNull();
             });
         });
-    })
+
+        describe("Movement commands", () => {
+            test("it should ignore any illigal movement command", () => {
+                const testInputController = inputController.createInputController();
+                testInputController.parseCommands("MOVE1");
+
+                expect(testInputController.getRobot()).toBeNull();
+            }); 
+
+            test("it should ignore any movement command when PLACE commmand is invalid and robot was not placed", () => {
+                const testInputController = inputController.createInputController();
+
+                testInputController.parseCommands("PLACE 5,5,NORTH");
+                
+                testInputController.parseCommands("MOVE");
+
+                expect(testInputController.getRobot()).toBeNull();
+            });
+
+            test("it should ignore any movement command before PLACE command", () => {
+                const testInputController = inputController.createInputController();
+                               
+                testInputController.parseCommands("RIGHT");
+                
+                expect(testInputController.getRobot()).toBeNull();
+            });
+        });
+    });
+
 });

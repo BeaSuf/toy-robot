@@ -16,21 +16,32 @@ function createInputController() {
 
     function parseCommands(command) {
         const place = /^PLACE\s{1}\d+,\d+,(WEST|NORTH|EAST|SOUTH)$/;
-
-        let action = "";
+        const actions = ["MOVE", "RIGHT", "LEFT", "REPORT"];
+                    
+        if(!place.test(command) && !actions.includes(command)) {        
+            return null;
+        }
         
-        if(place.test(command)) {
-            let [placeAction, x, y, f]  = command.split(/[\s,]+/);
-            action = placeAction;
+        if(place.test(command)){
+            placeCommand(command);
+        }
 
-            if(table.isPositionValid(x, y)) {
-                robot = robotEntity.createRobot();
-                const position = positiionEntity.createPosition(parseInt(x), parseInt(y), f);
-                robot.setPosition(position);
-            }             
-        }    
+        // If position was not valid, the robot was not created and placed, it should ignore any movement action
+        if(robot === null) {
+            return null;
+        }
 
-        return action;
+        return robot.getPosition().getPosition();
+    }
+
+    function placeCommand(command) {
+        let [placeAction, x, y, f]  = command.split(/[\s,]+/);
+      
+        if(table.isPositionValid(x, y)) {
+            robot = robotEntity.createRobot();
+            const position = positiionEntity.createPosition(parseInt(x), parseInt(y), f);
+            robot.setPosition(position); 
+        }
     }
 
     return {
