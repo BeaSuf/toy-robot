@@ -109,6 +109,106 @@ describe("Input-Controller", () => {
                 expect(testInputController.getRobot()).toBeNull();
             });
         });
+
+        describe("RIGHT command", () => {
+            test("it should return position with EAST facing direction when the current direction is NORTH and preserve the x and y coordinates", () => {
+                const testInputController = inputController.createInputController();
+
+                testInputController.parseCommands("PLACE 1,2,NORTH");
+                
+                testInputController.parseCommands("RIGHT");
+
+                const robot = testInputController.getRobot();
+
+                expect(robot.getPosition().getPosition()).toEqual({x:1, y:2, f:"EAST"}) 
+            });
+
+            test("it should return position with SOUTH facing direction when the current direction is EAST and preserve the x and y coordinates", () => {
+                const testInputController = inputController.createInputController();
+
+                testInputController.parseCommands("PLACE 1,2,EAST");
+                
+                testInputController.parseCommands("RIGHT");
+
+                const robot = testInputController.getRobot();
+                
+                expect(robot.getPosition().getPosition()).toEqual({x:1, y:2, f:"SOUTH"}) 
+            });
+
+            test("it should return position with WEST facing direction when the current direction is SOUTH and preserve the x and y coordinates", () => {
+                const testInputController = inputController.createInputController();
+
+                testInputController.parseCommands("PLACE 1,2,SOUTH");
+                
+                testInputController.parseCommands("RIGHT");
+
+                const robot = testInputController.getRobot();
+                
+                expect(robot.getPosition().getPosition()).toEqual({x:1, y:2, f:"WEST"}) 
+            });
+
+            test("it should return position with NORTH facing direction when the current direction is WEST and preserve the x and y coordinates", () => {
+                const testInputController = inputController.createInputController();
+
+                testInputController.parseCommands("PLACE 1,2,WEST");
+                
+                testInputController.parseCommands("RIGHT");
+
+                const robot = testInputController.getRobot();
+                
+                expect(robot.getPosition().getPosition()).toEqual({x:1, y:2, f:"NORTH"}) 
+            });
+        });
+
+        describe("LEFT command", () => {
+            test("it should return position with WEST facing direction when the current direction is NORTH and preserve the x and y coordinates", () => {
+                const testInputController = inputController.createInputController();
+
+                testInputController.parseCommands("PLACE 1,2,NORTH");
+                
+                testInputController.parseCommands("LEFT");
+
+                const robot = testInputController.getRobot();
+
+                expect(robot.getPosition().getPosition()).toEqual({x:1, y:2, f:"WEST"}) 
+            });
+
+            test("it should return position with SOUTH facing direction when the current direction is WEST and preserve the x and y coordinates", () => {
+                const testInputController = inputController.createInputController();
+
+                testInputController.parseCommands("PLACE 1,2,WEST");
+                
+                testInputController.parseCommands("LEFT");
+
+                const robot = testInputController.getRobot();
+                
+                expect(robot.getPosition().getPosition()).toEqual({x:1, y:2, f:"SOUTH"}) 
+            });
+
+            test("it should return position with EAST facing direction when the current direction is SOUTH and preserve the x and y coordinates", () => {
+                const testInputController = inputController.createInputController();
+
+                testInputController.parseCommands("PLACE 1,2,SOUTH");
+                
+                testInputController.parseCommands("LEFT");
+
+                const robot = testInputController.getRobot();
+                
+                expect(robot.getPosition().getPosition()).toEqual({x:1, y:2, f:"EAST"}) 
+            });
+
+            test("it should return position with NORTH facing direction when the current direction is EAST and preserve the x and y coordinates", () => {
+                const testInputController = inputController.createInputController();
+
+                testInputController.parseCommands("PLACE 1,2,EAST");
+                
+                testInputController.parseCommands("LEFT");
+
+                const robot = testInputController.getRobot();
+                
+                expect(robot.getPosition().getPosition()).toEqual({x:1, y:2, f:"NORTH"}) 
+            });
+        });
     });
 
 });

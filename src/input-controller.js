@@ -6,6 +6,9 @@ function createInputController() {
     const table = tableEntity.createTable();
     let robot = null;
 
+    const place = /^PLACE\s{1}\d+,\d+,(WEST|NORTH|EAST|SOUTH)$/;
+    const actions = ["MOVE", "RIGHT", "LEFT", "REPORT"];
+
     function getTable() {
         return table;
     }
@@ -15,9 +18,6 @@ function createInputController() {
     }
 
     function parseCommands(command) {
-        const place = /^PLACE\s{1}\d+,\d+,(WEST|NORTH|EAST|SOUTH)$/;
-        const actions = ["MOVE", "RIGHT", "LEFT", "REPORT"];
-                    
         if(!place.test(command) && !actions.includes(command)) {        
             return null;
         }
@@ -31,6 +31,17 @@ function createInputController() {
             return null;
         }
 
+        const robotCurrentPosition = robot.getPosition().getPosition();
+
+        switch (command) {
+            case "RIGHT":
+            case "LEFT":
+                turn(command, robotCurrentPosition);
+                break;            
+            default:
+                break;
+        }
+
         return robot.getPosition().getPosition();
     }
 
@@ -41,6 +52,66 @@ function createInputController() {
             robot = robotEntity.createRobot();
             const position = positiionEntity.createPosition(parseInt(x), parseInt(y), f);
             robot.setPosition(position); 
+        }
+    }
+
+    function turn(command, {x, y, f}) {
+        const newFacingDirection = turning[command.toLowerCase()](f);
+
+        const position = positiionEntity.createPosition(x, y, newFacingDirection);
+        
+        if(table.isPositionValid(x, y)) {
+            robot.setPosition(position); 
+        }
+    }
+
+    const turning = {        
+        right(f) {
+            let newFacingDirection = "";
+
+            switch (f) {
+                case "NORTH":
+                    newFacingDirection = "EAST";
+                    break;
+                case "EAST":
+                    newFacingDirection = "SOUTH";
+                    break;
+                case "SOUTH":
+                    newFacingDirection = "WEST";
+                    break;
+                case "WEST":
+                    newFacingDirection = "NORTH";
+                    break;                
+            
+                default:
+                    break;
+            }
+
+            return newFacingDirection;
+        },
+
+        left(f) {
+            let newFacingDirection = "";
+
+            switch (f) {
+                case "NORTH":
+                    newFacingDirection = "WEST";
+                    break;
+                case "WEST":
+                    newFacingDirection = "SOUTH";
+                    break;
+                case "SOUTH":
+                    newFacingDirection = "EAST";
+                    break;
+                case "EAST":
+                    newFacingDirection = "NORTH";
+                    break;                
+            
+                default:
+                    break;
+            }
+
+            return newFacingDirection;
         }
     }
 
