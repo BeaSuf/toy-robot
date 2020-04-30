@@ -39,7 +39,11 @@ function createInputController() {
                 turn(command, robotCurrentPosition);
                 break;  
             case "MOVE":
-                move(robotCurrentPosition);          
+                move(robotCurrentPosition);       
+                break;
+            case "REPORT":   
+                report();
+                break;
             default:
                 break;
         }
@@ -61,7 +65,7 @@ function createInputController() {
         const newFacingDirection = turning[command.toLowerCase()](f);
 
         const position = positiionEntity.createPosition(x, y, newFacingDirection);
-        
+                
         if(table.isPositionValid(x, y)) {
             robot.setPosition(position); 
         }
@@ -141,6 +145,11 @@ function createInputController() {
         if(table.isPositionValid(x, y)) {
             robot.setPosition(position); 
         }
+    }
+
+    function report() {
+        const {x, y, f} = robot.getPosition().getPosition();
+        console.log(`Robot's position: ${x},${y},${f}`);        
     }
 
     return {

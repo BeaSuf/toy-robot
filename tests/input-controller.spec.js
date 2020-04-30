@@ -1,5 +1,17 @@
 const inputController = require("../src/input-controller.js");
 
+beforeAll(() => {
+    jest.spyOn(console, 'log').mockImplementation(() =>{});
+});
+
+afterAll(() => {
+    console.log.mockRestore();
+});
+
+afterEach(() => {
+    console.log.mockClear();
+});
+
 describe("Input-Controller", () => {
     describe("Initialising", () => {
         test("it should have table property that is not null and has default width and heigh equal to 5", () => { 
@@ -305,6 +317,20 @@ describe("Input-Controller", () => {
                 const robot = testInputController.getRobot();
 
                 expect(robot.getPosition().getPosition()).toEqual({x:0, y:2, f:"WEST"}) 
+            });
+        });
+
+        describe("REPORT command", () => {
+            test("it should console 'Robot's position: 1,2,NORTH' and remain in the current position ", () => {
+                const testInputController = inputController.createInputController();
+
+                testInputController.parseCommands("PLACE 1,2,NORTH");
+
+                testInputController.parseCommands("REPORT");
+                const robot = testInputController.getRobot();
+
+                expect(global.console.log).toHaveBeenCalledWith("Robot's position: 1,2,NORTH");
+                expect(robot.getPosition().getPosition()).toEqual({x:1, y:2, f:"NORTH"})               
             });
         });
     });
