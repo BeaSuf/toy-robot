@@ -37,7 +37,9 @@ function createInputController() {
             case "RIGHT":
             case "LEFT":
                 turn(command, robotCurrentPosition);
-                break;            
+                break;  
+            case "MOVE":
+                move(robotCurrentPosition);          
             default:
                 break;
         }
@@ -112,6 +114,32 @@ function createInputController() {
             }
 
             return newFacingDirection;
+        }
+    }
+
+    function move({x, y, f}) {
+        
+        switch (f) {
+            case "NORTH":
+                y++;
+                break;
+            case "EAST":
+                x++;
+                break;
+            case "SOUTH":
+                y--;
+                break;
+            case "WEST":
+                x--;
+                break; 
+            default:
+                break;
+        }
+
+        const position = positiionEntity.createPosition(x, y, f);
+        
+        if(table.isPositionValid(x, y)) {
+            robot.setPosition(position); 
         }
     }
 

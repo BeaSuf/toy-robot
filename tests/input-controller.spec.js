@@ -83,30 +83,78 @@ describe("Input-Controller", () => {
             });
         });
 
-        describe("Movement commands", () => {
-            test("it should ignore any illigal movement command", () => {
+        describe("Movement and REPORT commands", () => {
+            test("it should ignore any illigal movement or report command", () => {
                 const testInputController = inputController.createInputController();
-                testInputController.parseCommands("MOVE1");
+                testInputController.parseCommands("MOVE 1");
 
                 expect(testInputController.getRobot()).toBeNull();
             }); 
 
-            test("it should ignore any movement command when PLACE commmand is invalid and robot was not placed", () => {
+            test("it should ignore any movement or report command when PLACE commmand is invalid and robot was not placed", () => {
                 const testInputController = inputController.createInputController();
 
                 testInputController.parseCommands("PLACE 5,5,NORTH");
                 
-                testInputController.parseCommands("MOVE");
+                testInputController.parseCommands("LEFT");
 
                 expect(testInputController.getRobot()).toBeNull();
             });
 
-            test("it should ignore any movement command before PLACE command", () => {
+            test("it should ignore any movement or report command before PLACE command", () => {
                 const testInputController = inputController.createInputController();
                                
-                testInputController.parseCommands("RIGHT");
+                testInputController.parseCommands("REPORT");
                 
                 expect(testInputController.getRobot()).toBeNull();
+            });
+
+            test("it should ignore MOVE command (remain in the same position) when robot's position is out of table limits as a result of potential move when facing NORTH", () => {
+                const testInputController = inputController.createInputController();
+
+                testInputController.parseCommands("PLACE 2,4,NORTH");
+
+                testInputController.parseCommands("MOVE");
+
+                const robot = testInputController.getRobot();
+
+                expect(robot.getPosition().getPosition()).toEqual({x:2, y:4, f:"NORTH"}) 
+            });
+
+            test("it should ignore MOVE command (remain in the same position) when robot's position is out of table limits as a result of potential move when facing EAST", () => {
+                const testInputController = inputController.createInputController();
+
+                testInputController.parseCommands("PLACE 4,2,EAST");
+
+                testInputController.parseCommands("MOVE");
+
+                const robot = testInputController.getRobot();
+
+                expect(robot.getPosition().getPosition()).toEqual({x:4, y:2, f:"EAST"}) 
+            });
+
+            test("it should ignore MOVE command (remain in the same position) when robot's position is out of table limits as a result of potential move when facing SOUTH", () => {
+                const testInputController = inputController.createInputController();
+
+                testInputController.parseCommands("PLACE 2,0,SOUTH");
+
+                testInputController.parseCommands("MOVE");
+
+                const robot = testInputController.getRobot();
+
+                expect(robot.getPosition().getPosition()).toEqual({x:2, y:0, f:"SOUTH"}) 
+            });
+
+            test("it should ignore MOVE command (remain in the same position) when robot's position is out of table limits as a result of potential move when facing WEST", () => {
+                const testInputController = inputController.createInputController();
+
+                testInputController.parseCommands("PLACE 0,2,WEST");
+
+                testInputController.parseCommands("MOVE");
+
+                const robot = testInputController.getRobot();
+
+                expect(robot.getPosition().getPosition()).toEqual({x:0, y:2, f:"WEST"}) 
             });
         });
 
@@ -207,6 +255,56 @@ describe("Input-Controller", () => {
                 const robot = testInputController.getRobot();
                 
                 expect(robot.getPosition().getPosition()).toEqual({x:1, y:2, f:"NORTH"}) 
+            });
+        });
+
+        describe("MOVE command", () => {
+            test("it should return positoin with current x coordinate and y+1 coordinate when the current direction is NORTH", () => {
+                const testInputController = inputController.createInputController();
+
+                testInputController.parseCommands("PLACE 1,2,NORTH");
+
+                testInputController.parseCommands("MOVE");
+
+                const robot = testInputController.getRobot();
+
+                expect(robot.getPosition().getPosition()).toEqual({x:1, y:3, f:"NORTH"}) 
+            });
+
+            test("it should return positoin with current y coordinate and x+1 coordinate when the current direction is EAST", () => {
+                const testInputController = inputController.createInputController();
+
+                testInputController.parseCommands("PLACE 1,2,EAST");
+
+                testInputController.parseCommands("MOVE");
+
+                const robot = testInputController.getRobot();
+
+                expect(robot.getPosition().getPosition()).toEqual({x:2, y:2, f:"EAST"}) 
+            });
+
+            test("it should return positoin with current x coordinate and y-1 coordinate when the current direction is SOUTH", () => {
+                const testInputController = inputController.createInputController();
+
+                testInputController.parseCommands("PLACE 1,2,SOUTH");
+
+                testInputController.parseCommands("MOVE");
+
+                const robot = testInputController.getRobot();
+
+                expect(robot.getPosition().getPosition()).toEqual({x:1, y:1, f:"SOUTH"}) 
+            });
+
+            test("it should return positoin with current y coordinate and x-1 coordinate when the current direction is WEST", () => {
+                const testInputController = inputController.createInputController();
+
+                testInputController.parseCommands("PLACE 1,2,WEST");
+
+                testInputController.parseCommands("MOVE");
+
+                const robot = testInputController.getRobot();
+
+                expect(robot.getPosition().getPosition()).toEqual({x:0, y:2, f:"WEST"}) 
             });
         });
     });
