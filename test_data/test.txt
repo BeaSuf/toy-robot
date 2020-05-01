@@ -1,0 +1,117 @@
+TEST DATA
+--------------
+
+====PLACE=====
+
+1. Robot can be placed only inside the table top limits (default 5x5). Invalid PLACE commands are ignored.
+
+PLACE 5,1,NORTH
+REPORT
+
+Expected output: 
+-----------------
+N/A
+
+2. All movement and report commands are ignored until robot was not placed on the table.
+MOVE
+RIGHT
+LEFT
+REPORT
+PLACE 0,0,NORTH
+MOVE
+REPORT
+
+Expected output:
+-----------------
+Robot's position: 0,1,NORTH
+
+
+3. On successful PLACE action, other PLACE commands can be issued.
+PLACE 0,0,NORTH
+REPORT
+PLACE 4,4,SOUTH 
+REPORT
+
+Expected output:
+-----------------
+Robot's position: 0,0,NORTH
+Robot's position: 4,4,SOUTH
+
+
+=====RIGHT====
+4. Robot rotates 90 degrees to the right without changing the position. 
+PLACE 0,0,NORTH
+REPORT
+RIGHT
+REPORT
+
+Expected output:
+-----------------
+Robot's position: 0,0,NORTH
+Robot's position: 0,0,EAST
+
+
+
+=====LEFT====
+5. Robot rotates 90 degrees to the left without changing the position. 
+PLACE 0,0,NORTH
+REPORT
+LEFT
+REPORT
+
+Expected output:
+-----------------
+Robot's position: 0,0,NORTH
+Robot's position: 0,0,WEST
+
+
+
+====MOVE====
+6. Robot moves one step forward in the facing direction.
+PLACE 2,2,EAST
+REPORT
+MOVE
+REPORT
+
+Expected output:
+-----------------
+Robot's position: 2,2,EAST
+Robot's position: 3,2,EAST
+
+7. Robot can't move out of table's limits
+PLACE 2,4,NORTH
+REPORT
+MOVE
+REPORT
+
+Expected output:
+-----------------
+Robot's position: 2,4,NORTH
+Robot's position: 2,4,NORTH
+
+
+
+====REPORT====
+9. Outputs current robot's position to the terminal.
+PLACE 0,0,NORTH
+REPORT
+
+Expected output:
+-----------------
+Robot's position: 0,0,NORTH
+
+
+====Invalid commands====
+10. Invalid commands are ignored
+Right
+22
+Move
+0,0
+Place 0
+:
+
+!
+
+Expected output: 
+-----------------
+N/A

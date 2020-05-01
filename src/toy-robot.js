@@ -1,14 +1,24 @@
-const table = require("../src/table.js");
-const robot = require("../src/robot.js");
+const fs = require("fs");
+const inputControllerEntity = require("../src/input-controller.js");
 
-// create table
-const theTable = table.createTable();
+function readFile(){
+    const fileName = process.argv.slice(2)[0];
+    
+    return fs.readFileSync(fileName).toString();
+}
 
-// is the table position of (0, 0) is valid?
-console.log(theTable.isPositionValid(0,0));
+function operate(commandsList) {
+    const inputController = inputControllerEntity.createInputController();
+    
+    const commands = commandsList.split('\n');
 
-// create robot
-const theRobot = robot.createRobot();
+    commands.forEach(command => {
+        command = command.trim();
+        if(command !== '') {
+            inputController.parseCommands(command);
+        }
+    });
+} 
 
-// Initial position of the robot is null
-theRobot.getPosition();
+const commandsList = readFile();
+operate(commandsList);
