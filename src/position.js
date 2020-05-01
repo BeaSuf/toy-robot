@@ -1,31 +1,31 @@
-function createPosition(xPos, yPos, facing) {
-    const position = {
+const createPosition = (xPos, yPos, facing) => {
+    const positionProperties = {
         x: xPos,
         y: yPos,
         f: facing
     }
 
-    function getX() {
-        return position.x;
+    const getX = () => {
+        return positionProperties.x;
     }
 
-    function getY() {
-        return position.y;
+    const getY = () => {
+        return positionProperties.y;
     }
 
-    function getF() {
-        return position.f;
+    const getF = () => {
+        return positionProperties.f;
     }
 
-    function getPosition() {
-        return position;
+    const getPositionProperties = () => {
+        return positionProperties;
     }
 
     return {
         getX,
         getY,
         getF,
-        getPosition
+        getPositionProperties
     }
 }
 

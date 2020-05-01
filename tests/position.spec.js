@@ -1,43 +1,43 @@
-const positiion = require("../src/position.js");
+const positiionModule = require("../src/position.js");
 
 describe("Position", () => {
     describe("Initialising", () => {
         test("it should have x coordinate", () => {
-            const thePosition = positiion.createPosition(2, 2, "NORTH");
+            const position = positiionModule.createPosition(2, 2, "NORTH");
 
-            const received = thePosition.getX();
+            const xCoordinate = position.getX();
 
-            expect(received).not.toBeNull();
-            expect(received).toBeDefined();
-            expect(received).not.toBeUndefined();
+            expect(xCoordinate).not.toBeNull();
+            expect(xCoordinate).toBeDefined();
+            expect(xCoordinate).not.toBeUndefined();
         });
 
         test("it should have y coordinate", () => {
-            const thePosition = positiion.createPosition(2, 2, "NORTH");
+            const position = positiionModule.createPosition(2, 2, "NORTH");
 
-            const received = thePosition.getY();
+            const yCoordinate = position.getY();
 
-            expect(received).not.toBeNull();
-            expect(received).toBeDefined();
-            expect(received).not.toBeUndefined();
+            expect(yCoordinate).not.toBeNull();
+            expect(yCoordinate).toBeDefined();
+            expect(yCoordinate).not.toBeUndefined();
         });
 
         test("it should have f properety", () => {
-            const thePosition = positiion.createPosition(2, 2, "NORTH");
+            const position = positiionModule.createPosition(2, 2, "NORTH");
 
-            const received = thePosition.getF();
+            const facingDirection = position.getF();
 
-            expect(received).not.toBeNull();
-            expect(received).toBeDefined();
-            expect(received).not.toBeUndefined();
+            expect(facingDirection).not.toBeNull();
+            expect(facingDirection).toBeDefined();
+            expect(facingDirection).not.toBeUndefined();
         });
 
         test("it should return position", () => {
-            const thePosition = positiion.createPosition(2, 2, "NORTH");
+            const position = positiionModule.createPosition(2, 2, "NORTH");
 
-            const received = thePosition.getPosition();
-            const expected = {x: 2, y: 2, f: "NORTH"};
-            expect(received).toEqual(expected);
+            const positionProperties = position.getPositionProperties();
+            
+            expect(positionProperties).toEqual({x: 2, y: 2, f: "NORTH"});
         })
     });
 }); 

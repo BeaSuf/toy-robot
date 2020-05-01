@@ -1,8 +1,10 @@
 const fs = require("fs");
-const inputControllerModule = require("../src/input-controller.js");
+const inputControllerModule = require("./src/input-controller.js");
 
 const readFile = () => {
-    const fileName = process.argv.slice(2)[0];
+    const arg = process.argv.slice(2)[0];
+       
+    const fileName =  arg !== undefined ? arg : "./test_data/test.txt";
     
     return fs.readFileSync(fileName).toString();
 }

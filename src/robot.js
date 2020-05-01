@@ -1,16 +1,16 @@
-function createRobot() {
+const createRobot = () => {
     let position = null;
 
-    function getPosition() {
+    const getPosition = () => {
         return position;
     }
 
-    function setPosition(newPosition) {
+    const setPosition = (newPosition) => {
         position = newPosition;
     }
 
-    function isInPlace() {
-        return position != null;
+    const isInPlace = () => {
+        return position !== null;
     }
 
     return {

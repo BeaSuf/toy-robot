@@ -1,57 +1,58 @@
-const robot = require("../src/robot.js");
-const position = require("../src/position.js");
+const robotModule = require("../src/robot.js");
+const positionModule = require("../src/position.js");
 
 describe("Robot", () => {
     describe("Initialising", () => {
         test("it should have null as an initial position", () => {
-            const testRobot = robot.createRobot();
+            const robot = robotModule.createRobot();
     
-            const received = testRobot.getPosition();
-            expect(received).toBeNull();
+            const position = robot.getPosition();
+            
+            expect(position).toBeNull();
         });
     });
 
     describe("Position Handlers", () => {
         test("it should set robot's position to a new position", () => {
-            const testRobot = robot.createRobot();
+            const robot = robotModule.createRobot();
 
-            const newPosition = position.createPosition(0, 0, "NORTH");
+            const position = positionModule.createPosition(0, 0, "NORTH");
             
-            testRobot.setPosition(newPosition.getPosition());
+            robot.setPosition(position.getPositionProperties());
             
-            const received = testRobot.getPosition();
-            const expected = newPosition.getPosition();
-            expect(received).toEqual(expected);
-            expect(received).toEqual({x: 0, y: 0, f: "NORTH"});
+            const robotPosition = robot.getPosition();
+                    
+            expect(robotPosition).toEqual({x: 0, y: 0, f: "NORTH"});
         });
 
         test("it should return robot's position as null if new position is null", () => {
-            const testRobot = robot.createRobot();
+            const robot = robotModule.createRobot();
 
-            const newPosition = null;
+            const position = null;
             
-            testRobot.setPosition(newPosition);
+            robot.setPosition(position);
             
-            const received = testRobot.getPosition();
-            expect(received).toBeNull();
+            const robotPosition = robot.getPosition();
+            
+            expect(robotPosition).toBeNull();
         });
     });
 
     describe("isInPlace", () => {
         test("it should return true if position is not null", () => {
-            const testRobot = robot.createRobot();
+            const robot = robotModule.createRobot();
 
-            const newPosition = position.createPosition(0, 0, "NORTH");
+            const position = positionModule.createPosition(0, 0, "NORTH");
             
-            testRobot.setPosition(newPosition.getPosition());
+            robot.setPosition(position.getPositionProperties());
             
-            expect(testRobot.isInPlace()).toBeTruthy();
+            expect(robot.isInPlace()).toBeTruthy();
         });
 
         test("it should return false if position is null", () => {
-            const testRobot = robot.createRobot();
+            const robot = robotModule.createRobot();
 
-            expect(testRobot.isInPlace()).toBeFalsy();
+            expect(robot.isInPlace()).toBeFalsy();
         });
     });
 });
