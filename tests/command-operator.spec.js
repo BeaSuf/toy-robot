@@ -1,4 +1,4 @@
-const comandOperatorModule = require("../src/command-operator");
+const commandOperatorModule = require("../src/command-operator");
 
 beforeAll(() => {
     jest.spyOn(console, 'log').mockImplementation(() => {});
@@ -15,7 +15,7 @@ afterEach(() => {
 describe("Command-Oparator", () => {
     describe("PLACE command", () => {
         test("it should return position matching the 'PLACE' command", () => {
-            const commandOperator = comandOperatorModule.createCommandOpperator();
+            const commandOperator = commandOperatorModule.createCommandOpperator();
 
             const position = commandOperator.place(1, 2, "NORTH");
 
@@ -25,7 +25,7 @@ describe("Command-Oparator", () => {
 
     describe("RIGHT command", () => {
         test("it should return position with facing EAST and remain the current x,y coordinates", () => {
-            const commandOperator = comandOperatorModule.createCommandOpperator();
+            const commandOperator = commandOperatorModule.createCommandOpperator();
 
             commandOperator.place({x:1, y:2, f:"NORTH"});
 
@@ -37,7 +37,7 @@ describe("Command-Oparator", () => {
 
     describe("LEFT command", () => {
         test("it should return position with facing WEST and remain the current x,y coordinates", () => {
-            const commandOperator = comandOperatorModule.createCommandOpperator();
+            const commandOperator = commandOperatorModule.createCommandOpperator();
 
             commandOperator.place({x:1, y:2, f:"NORTH"});
 
@@ -49,7 +49,7 @@ describe("Command-Oparator", () => {
 
     describe("MOVE command", () => {
         test("it should return position with x=1 and y=3 and remain the current facing NORTH", () => {
-            const commandOperator = comandOperatorModule.createCommandOpperator();
+            const commandOperator = commandOperatorModule.createCommandOpperator();
 
             commandOperator.place({x:1, y:2, f:"NORTH"});
 
@@ -61,7 +61,7 @@ describe("Command-Oparator", () => {
 
     describe("REPORT command", () => {
         test("it should return position and remain in the current position", () => {
-            const commandOperator = comandOperatorModule.createCommandOpperator();
+            const commandOperator = commandOperatorModule.createCommandOpperator();
 
             commandOperator.place({x:1, y:2, f:"NORTH"});
 
@@ -70,8 +70,8 @@ describe("Command-Oparator", () => {
             expect(position.getPositionProperties()).toEqual({x:1, y:2, f:"NORTH"});      
         });
 
-        test("it should console 'Robot's position: 1,2,NORTH' and remain in the current position ", () => {
-            const commandOperator = comandOperatorModule.createCommandOpperator();
+        test("it should console log 'Robot's position: 1,2,NORTH' and remain in the current position ", () => {
+            const commandOperator = commandOperatorModule.createCommandOpperator();
 
             commandOperator.place({x:1, y:2, f:"NORTH"});
 

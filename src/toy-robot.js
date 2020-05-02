@@ -1,11 +1,16 @@
 const fs = require("fs");
 const inputControllerModule = require("./input-controller.js");
 
+/**
+ * ToyRobot module
+ * Operates the commands read from a test file
+ */
 const createToyRobot = () => {
+
     /**
-     * readFile function
-     * @param - file name (path) to read the commands from
-     * @returns array of commands
+     * Reads list of commands from file 
+     * @param {*} fileName - file name (path) to read the commands from
+     * @returns {array} commands array
      */
     const readFile = (fileName) => {
         fileName = fileName ? fileName : "./test_data/test.txt";
@@ -16,7 +21,7 @@ const createToyRobot = () => {
     }
 
     /**
-     * Operate function - operates the commands for the robot
+     * Operates the commands from file
      * @param fileName - file name (path) to read the commands from
     */
     const operate = (fileName)  => {
@@ -25,7 +30,7 @@ const createToyRobot = () => {
         const commands = readFile(fileName);
         
         commands.forEach(command => {
-            inputController.parseCommands(command);       
+            inputController.parseCommand(command);       
         });
     } 
 
