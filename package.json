@@ -12,5 +12,8 @@
   "license": "ISC",
   "devDependencies": {
     "jest": "^25.5.3"
+  },
+  "dependencies": {
+    "commander": "^5.1.0"
   }
 }
