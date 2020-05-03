@@ -30,6 +30,7 @@ const createToyRobot = () => {
         const commands = readFile(fileName);
         
         commands.forEach(command => {
+            command = command.trim();
             inputController.parseCommand(command);       
         });
     } 

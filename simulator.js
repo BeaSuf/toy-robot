@@ -16,7 +16,7 @@ program
 .description("test the robot. use test -h for help")
 .action(opts => {    
         const toyRobot = toyRobotModule.createToyRobot()
-        toyRobot.operate(opts.file1)
+        toyRobot.operate(opts.file)
     });
 
 program.parse(process.argv);
