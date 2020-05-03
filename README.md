@@ -8,7 +8,6 @@ Toy Robot Simulator written in Node.js and used commander (<https://github.com/t
 Environment: Built on Ubuntu 18.04.4 using node -v 8.17.0 and npm -v 6.13.4
 
 Clone this Repo
-> $ git clone https://github.com/BeaSuf/toy-robot.git
 
 **cd** to the root directory of the package
 > $ cd toy-robot
