@@ -7,6 +7,7 @@
 const createTable = (tableWidth = 5, tableHeight = 5) => {
     const width = tableWidth;
     const height = tableHeight;
+    const obsticles = [];
 
     /**
      * Getter for width property
@@ -22,6 +23,23 @@ const createTable = (tableWidth = 5, tableHeight = 5) => {
      */
     const getHeight = () => {
         return height;
+    }
+
+    const getObsticles = () => {
+        return obsticles;
+    }
+
+    const setObsticles = (xCoordinate, yCoordinate) => {
+        if(isXValid(xCoordinate) && isYValid(yCoordinate)) {
+            obsticles[xCoordinate] = obsticles[xCoordinate] || [];
+            obsticles[xCoordinate][yCoordinate] = 1;
+        }
+    }
+
+    const isObsticle = (xCoordinate, yCoordinate) => {
+        return getObsticles()[xCoordinate] ? 
+            getObsticles()[xCoordinate][yCoordinate] === 1 : 
+            false;
     }
 
     /**
@@ -54,6 +72,9 @@ const createTable = (tableWidth = 5, tableHeight = 5) => {
     return {
         getWidth,
         getHeight,
+        getObsticles,
+        setObsticles,
+        isObsticle,
         isPositionValid
     }
 }
